@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-dp
+  namespace: cka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: net
+  template:
+    metadata:
+      labels:   
+        app: net
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        command: ["sleep"]
+        args: ["3600"]
+        volumeMounts:
+        - name: nfs
+          mountPath: /nfs
+      restartPolicy: Always
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: pvc-03
+      nodeSelector:
+        net: gigabit

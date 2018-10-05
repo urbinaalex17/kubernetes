@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: redis-ds
+  namespace: cka
+spec:
+  selector:
+    matchLabels:
+      app: daemonset
+  template:
+    metadata: 
+      labels:
+        app: daemonset
+    spec:
+      containers: 
+      - image: redis
+        name: redis
+        command: ["sleep","3000"]
+      tolerations:
+       - effect: NoSchedule
+         key: node-role.kubernetes.io
+         value: master
+

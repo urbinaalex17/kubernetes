@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-pause
+spec:
+  selector:
+    matchLabels:
+      tier: ds
+  template:
+    metadata:
+      labels:
+        tier: ds
+    spec:
+      containers:
+      - image: k8s.gcr.io/pause:2.0
+        name: pause 
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule 

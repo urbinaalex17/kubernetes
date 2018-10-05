@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pause-pod
+spec:
+  containers:
+  - image: k8s.gcr.io/pause
+    name: pause
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+

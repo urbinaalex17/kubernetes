@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-dp
+  namespace: cka
+  annotations: 
+    AppVersion: "0.9"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: all-in-one
+  template:
+    metadata:
+      labels:
+        app: all-in-one
+    spec:
+      containers: 
+      - image: redis
+        name: redis
+        command: ["sleep"]
+        args: ["3600"]
+      - image: busybox
+        name: busybox
+        command: ["/bin/sh"]
+        args: ["-c", echo "$(date) - INFO - application started"; echo "$(date) - ERROR - unable-to-access-website"]
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+      - image: busybox
+        name: toolbox
+        command: 
+        - sleep
+        - "3600"
+      restartPolicy: Always
+      nodeSelector:
+        net: gigabit

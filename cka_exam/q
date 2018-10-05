@@ -1,0 +1,76 @@
+Name:               foo
+Namespace:          cka
+Priority:           0
+PriorityClassName:  <none>
+Node:               w-alexanderuc-ea2ddce53.mylabserver.com/172.31.103.118
+Start Time:         Fri, 05 Oct 2018 18:44:43 +0000
+Labels:             <none>
+Annotations:        <none>
+Status:             Running
+IP:                 10.244.2.90
+Containers:
+  redis:
+    Container ID:  docker://7541fb2fb7d64275d8eaae03bd3c1647fe105a043d2f23210f51b35e5dee3310
+    Image:         redis
+    Image ID:      docker-pullable://redis@sha256:3af96d7643f46b9cfb475b6e26720db8ac00cbc7396d5b74fe7b0080f6df337e
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      sleep
+    Args:
+      3600
+    State:          Running
+      Started:      Fri, 05 Oct 2018 18:44:47 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-bsgz8 (ro)
+  foo:
+    Container ID:  docker://c24e4ff1c7374305d69ccbe7439d1e31c4ce56008bafaa2c6e843535a18c4c3e
+    Image:         urbinaalex17/nginx
+    Image ID:      docker-pullable://urbinaalex17/nginx@sha256:252bcb5895a0c68a32be44ae2dbc9764c30146e77d4dd8f060d3cc4c5443847d
+    Port:          <none>
+    Host Port:     <none>
+    Command:
+      /bin/sh
+    Args:
+      -c
+      echo "$(date) - INFO - application started"; echo "$(date) - ERROR - unable-to-access-website"
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Fri, 05 Oct 2018 18:44:48 +0000
+      Finished:     Fri, 05 Oct 2018 18:44:48 +0000
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-bsgz8 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             False 
+  ContainersReady   False 
+  PodScheduled      True 
+Volumes:
+  default-token-bsgz8:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-bsgz8
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  net=gigabit
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason     Age   From                                              Message
+  ----    ------     ----  ----                                              -------
+  Normal  Scheduled  20s   default-scheduler                                 Successfully assigned cka/foo to w-alexanderuc-ea2ddce53.mylabserver.com
+  Normal  Pulling    18s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  pulling image "redis"
+  Normal  Pulled     16s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Successfully pulled image "redis"
+  Normal  Created    16s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Created container
+  Normal  Started    16s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Started container
+  Normal  Pulling    16s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  pulling image "urbinaalex17/nginx"
+  Normal  Pulled     15s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Successfully pulled image "urbinaalex17/nginx"
+  Normal  Created    15s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Created container
+  Normal  Started    15s   kubelet, w-alexanderuc-ea2ddce53.mylabserver.com  Started container
