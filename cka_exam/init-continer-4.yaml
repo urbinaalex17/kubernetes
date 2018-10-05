@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: bumpy-llama
+  namespace: cka
 spec:
   volumes:
   - name: workdir
@@ -9,8 +10,15 @@ spec:
   containers:
   - name: checker
     image: alpine
-    command: ["/bin/sh","-c","if [-f /workdir/gentle.txt]; then sleep 1000; else exit 1; fi" ]
+    command: ["/bin/sh","-c","if [ -f /workdir/gentle.txt ]; then sleep 1000; else exit 1; fi" ]
+    #command: ["sleep","1000"]
     volumeMounts:
     - name: workdir
       mountPath: /workdir
-
+  initContainers:
+  - name: init-file
+    image: busybox
+    command: ["/bin/sh","-c","touch /workdir/gentle.txt ; echo file created with success > /workdir/status"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /workdir
