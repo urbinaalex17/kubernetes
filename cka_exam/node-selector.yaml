@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-kusc
+  namespace: cka
+spec:
+  containers:
+  - image: redis
+    name: container1
+    command: ["sleep","60"]
+  nodeSelector:
+    net: gigabit
