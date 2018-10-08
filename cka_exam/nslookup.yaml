@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nslookup-pod
+  namespace: cka
+spec:
+  containers:
+  - image: busybox:1.28
+    name: toolbox
+    command: ["sleep","10000"]
+
